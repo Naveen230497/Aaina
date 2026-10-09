@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: aaina-dashboard
+    env: docker
+    region: oregon
+    plan: free
+    branch: main
+    dockerCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
+    envVars:
+      - key: SERPAPI_API_KEY
+        sync: false
+      
+  - type: web
+    name: aaina-api
+    env: docker
+    region: oregon
+    plan: free
+    branch: main
+    dockerCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SERPAPI_API_KEY
+        sync: false

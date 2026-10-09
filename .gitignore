@@ -1,0 +1,30 @@
+.env
+__pycache__/
+*.pyc
+.aaina/
+cases/
+*.jpg
+*.jpeg
+*.png
+*.webp
+!tests/fixtures/*
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Large Media Files (Over 100MB)
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# OS Files
+.DS_Store
+Thumbs.db
