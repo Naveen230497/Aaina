@@ -405,8 +405,15 @@ if urgent > 0 or review > 0:
                 
     if threat_locations:
         df = pd.DataFrame(threat_locations)
-        st.map(df, size=4000, color="#ef4444", zoom=1)
-        st.caption(f"Mapped {len(threat_locations)} high-risk server locations.")
+        try:
+            # Removed size and color parameters which silently crash WebGL in some Streamlit versions
+            st.map(df, zoom=1, use_container_width=True)
+            st.caption(f"Mapped {len(threat_locations)} high-risk server locations.")
+        except Exception as e:
+            st.warning("Map rendering failed. Falling back to text view.")
+            st.dataframe(df)
+    else:
+        st.info("No geospatial data available for these threats.")
 
 st.divider()
 for rep in res.reports:
